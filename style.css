@@ -1,0 +1,472 @@
+/* Estilos do site "Memórias da Computação" */
+
+/* Cores: tema claro (padrão) e tema escuro */
+:root {
+  --bg:#eef0f4;
+  --fg:#141821;
+  --mut:#566074;
+  --line:#c9cfdb;
+  --acc:#3434c9;
+  --tl:#0b6b61;
+  --sf:#fff;
+  --ok:#17703a;
+  --bad:#a8261e;
+  --hole:rgba(20,24,33,.10);
+  --rule:rgba(20,24,33,.05);
+  --grid:rgba(52,52,201,.09);
+  --glow:rgba(52,52,201,.14);
+  --bit:rgba(20,24,33,.16);
+}
+
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#0f1218;
+    --fg:#edf0f6;
+    --mut:#9aa3b5;
+    --line:#2a303c;
+    --acc:#a3a8ff;
+    --tl:#4fd1b5;
+    --sf:#171b24;
+    --ok:#6fd08c;
+    --bad:#ff8a80;
+    --hole:rgba(237,240,246,.10);
+    --rule:rgba(237,240,246,.05);
+    --grid:rgba(163,168,255,.09);
+    --glow:rgba(163,168,255,.16);
+    --bit:rgba(237,240,246,.16);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:#0f1218;
+  --fg:#edf0f6;
+  --mut:#9aa3b5;
+  --line:#2a303c;
+  --acc:#a3a8ff;
+  --tl:#4fd1b5;
+  --sf:#171b24;
+  --ok:#6fd08c;
+  --bad:#ff8a80;
+  --hole:rgba(237,240,246,.10);
+  --rule:rgba(237,240,246,.05);
+  --grid:rgba(163,168,255,.09);
+  --glow:rgba(163,168,255,.16);
+  --bit:rgba(237,240,246,.16);
+}
+
+:root {
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+html {
+  scroll-padding-top:env(safe-area-inset-top,0px);
+  scroll-behavior:smooth;
+}
+
+*,*::before,*::after {
+  box-sizing:inherit;
+}
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+
+/* Layout geral e cabeçalho */
+.wrap {
+  max-width:780px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+h1,h2,h3,.yr {
+  font-family:"Iowan Old Style",Georgia,"Times New Roman",serif;
+  font-weight:700;
+  line-height:1.1;
+  margin:0;
+}
+
+header {
+  padding:56px 0 40px;
+}
+
+h1 {
+  font-size:clamp(2.2rem,7vw,3.8rem);
+  max-width:14em;
+}
+
+.sub {
+  color:var(--mut);
+  max-width:34em;
+  margin:18px 0 0;
+  font-size:1.1rem;
+}
+
+.go {
+  display:inline-block;
+  margin-top:26px;
+  padding:12px 20px;
+  background:var(--acc);
+  color:var(--bg);
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.go:focus-visible,a:focus-visible,button:focus-visible,summary:focus-visible {
+  outline:3px solid var(--acc);
+  outline-offset:3px;
+}
+
+/* Seções da linha do tempo (ano em cima, texto embaixo, tudo centralizado na página) */
+.era {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:6px;
+  padding:38px 0;
+  position:relative;
+}
+
+.yr {
+  font-size:clamp(2.4rem,8vw,3.4rem);
+  color:var(--acc);
+  letter-spacing:-.02em;
+}
+
+.era.r .yr {
+  color:var(--tl);
+}
+
+.era h2 {
+  font-size:1.65rem;
+  margin-bottom:10px;
+}
+
+.era p {
+  margin:0 0 12px;
+}
+
+.era ul {
+  margin:0 0 12px;
+  padding-left:20px;
+}
+
+.era li {
+  margin-bottom:4px;
+}
+
+.note {
+  border-left:4px solid var(--acc);
+  padding:6px 0 6px 16px;
+  margin:16px 0;
+  background:transparent;
+}
+
+.note b {
+  display:block;
+  margin-bottom:2px;
+}
+
+.tw {
+  overflow-x:auto;
+  margin:14px 0;
+}
+
+table {
+  border-collapse:collapse;
+  min-width:420px;
+  width:100%;
+  background:var(--sf);
+}
+
+th,td {
+  border:1px solid var(--line);
+  padding:9px 12px;
+  text-align:left;
+  vertical-align:top;
+}
+
+th {
+  font-weight:600;
+}
+
+/* Quiz */
+.q {
+  background:var(--sf);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:18px;
+  margin:0 0 16px;
+}
+
+.q h3 {
+  font-size:1.15rem;
+  margin-bottom:12px;
+  font-family:inherit;
+  font-weight:600;
+  line-height:1.35;
+}
+
+.opt {
+  display:block;
+  width:100%;
+  text-align:left;
+  font:inherit;
+  color:var(--fg);
+  background:transparent;
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:10px 12px;
+  margin-bottom:8px;
+  cursor:pointer;
+}
+
+.opt:hover:not(:disabled) {
+  border-color:var(--acc);
+}
+
+.opt.ok {
+  border-color:var(--ok);
+  background:color-mix(in srgb,var(--ok) 16%,transparent);
+}
+
+.opt.no {
+  border-color:var(--bad);
+  background:color-mix(in srgb,var(--bad) 14%,transparent);
+}
+
+.ex {
+  margin:8px 0 0;
+  color:var(--mut);
+  font-size:.95rem;
+}
+
+#score {
+  font-weight:600;
+  margin:6px 0 0;
+}
+
+/* Espaços e legendas das fotos */
+.ph {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:12px;
+  margin:18px 0 6px;
+}
+
+.slot {
+  flex:1 1 180px;
+  min-height:130px;
+  margin:0;
+  border:2px dashed var(--line);
+  border-radius:8px;
+  padding:14px;
+  color:var(--mut);
+  font-size:.9rem;
+  line-height:1.4;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.slot b {
+  color:var(--fg);
+  margin-bottom:4px;
+}
+
+.ph figure {
+  margin:0;
+}
+
+.ph:empty {
+  display:none;
+}
+
+.ph .slot {
+  flex:1 1 180px;
+}
+
+figure img {
+  width:100%;
+  aspect-ratio:4 / 3;
+  object-fit:contain;
+  background:var(--sf);
+  display:block;
+  border-radius:6px;
+}
+
+/* Foto que ainda não está na pasta "imagens": vira uma caixa avisando qual arquivo falta */
+.foto.faltando {
+  border: 2px dashed var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.foto.faltando img {
+  display: none;
+}
+
+.foto.faltando figcaption::before {
+  content: "COLOCAR ALGUMA FOTO: " attr(data-arquivo);
+  display: block;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
+figcaption {
+  font-size:.85rem;
+  color:var(--mut);
+  margin-top:6px;
+}
+
+/* Rodapé e ajustes para celular */
+footer {
+  border-top:1px solid var(--line);
+  padding:30px 0 48px;
+  color:var(--mut);
+  font-size:.95rem;
+}
+
+@media (max-width:640px) {
+  .era {
+    grid-template-columns:minmax(0,1fr);
+    padding:30px 0;
+  }
+  .yr {
+    margin-bottom:2px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior:auto;
+  }
+}
+
+/* Fundo animado: passado (cartões perfurados) vira presente (circuitos) */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-hist,
+.bg-now {
+  position: absolute;
+  inset: 0;
+}
+
+/* Passado: furos de cartão perfurado e linhas de papel de registro */
+.bg-hist {
+  opacity: calc(1 - var(--p, 0));
+  background-image:
+    radial-gradient(circle, var(--hole) 3px, transparent 3.5px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 30px 30px, 150px 150px;
+}
+
+/* Presente: grade de circuito com brilho de tela */
+.bg-now {
+  opacity: var(--p, 0);
+  background-image:
+    radial-gradient(60% 50% at 50% 0%, var(--glow), transparent 70%),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: auto, 34px 34px, 34px 34px;
+}
+
+/* Símbolos flutuantes (criados no script.js) */
+.bits span {
+  position: absolute;
+  color: var(--bit);
+  font: 700 var(--s, 24px)/1 ui-monospace, Menlo, Consolas, monospace;
+  transform: translateY(calc(var(--sy, 0) * var(--k, -0.2) * 1px));
+  animation: bob var(--t, 12s) ease-in-out infinite alternate;
+}
+
+@keyframes bob {
+  to { translate: 0 -16px; }
+}
+
+/* Barra de progresso da leitura */
+.prog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  z-index: 5;
+  background: linear-gradient(90deg, var(--acc), var(--tl));
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+}
+
+/* Linha que separa as seções */
+.era::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Animações de entrada (só rodam se o visitante não pediu menos movimento) */
+@keyframes subir {
+  from { opacity: 0; transform: translateY(20px); }
+}
+
+@keyframes mostrar {
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  header > * { animation: subir .9s ease both; }
+  header h1 { animation-delay: .1s; }
+  header .sub { animation-delay: .3s; }
+  header .go { animation-delay: .5s; }
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  /* --r (de 0 a 1) é calculado pelo script.js conforme a posição de cada
+     elemento na tela: ao rolar para baixo ele aparece, ao rolar para cima ele se desfaz.
+     Se o script falhar, tudo aparece sozinho depois de 4 segundos. */
+  .era::before {
+    transform: scaleX(var(--r, 0));
+    transform-origin: left;
+    animation: mostrar .01s 4s forwards;
+  }
+
+  .era .yr,
+  .era > div:last-child > *:not(#qs),
+  .q {
+    opacity: var(--r, 0);
+    transform: translateY(calc((1 - var(--r, 0)) * 36px));
+    will-change: opacity, transform;
+    animation: mostrar .01s 4s forwards;
+  }
+
+  .era .yr {
+    transform: translateX(calc((1 - var(--r, 0)) * -40px));
+  }
+
+  /* Com o script funcionando, o plano B de 4 segundos é desligado */
+  .sc .era::before,
+  .sc .era .yr,
+  .sc .era > div:last-child > *:not(#qs),
+  .sc .q {
+    animation: none;
+  }
+}

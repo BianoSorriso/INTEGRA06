@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Memórias da Computação</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Fundo animado: passado (cartões perfurados) que vira presente (circuitos) conforme a rolagem -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-hist"></div>
+  <div class="bg-now"></div>
+  <div class="bits" id="bits"></div>
+</div>
+<div class="prog" aria-hidden="true"></div>
+
+<div class="wrap">
+<header>
+<h1>Memórias da Computação</h1>
+<p class="sub">Da evolução tecnológica às transformações das relações humanas. Uma viagem de 1843 até hoje, com uma pergunta no fim: como aproveitar a tecnologia sem perder a qualidade das nossas relações?</p>
+<a class="go" href="#s1">Começar a viagem</a>
+</header>
+
+<section class="era" id="s1">
+<div class="yr">1843</div>
+<div>
+<h2>Os primeiros passos</h2>
+<p>Antes dos computadores eletrônicos, ferramentas e métodos já ajudavam a calcular. O ábaco organizava contas, e o mecanismo de Anticítera, da Grécia Antiga, previa eventos astronômicos. Até o século XX, "computadores" eram pessoas que calculavam à mão.</p>
+<p>No século XIX, Charles Babbage projetou a Máquina Analítica, ancestral conceitual do computador moderno.</p>
+<div class="note"><b>Ada Lovelace (1815-1852)</b>Em 1843, escreveu notas sobre a Máquina Analítica que incluíam um algoritmo para calcular números de Bernoulli, considerado por muitos o primeiro programa da história. Ela também intuiu que a máquina poderia manipular símbolos, e não só números.</div>
+<div class="ph" data-secao="1843"></div>
+</div>
+</section>
+
+<section class="era" id="s2">
+<div class="yr">1946</div>
+<div>
+<h2>O nascimento dos computadores</h2>
+<p>Em 1936, Alan Turing formalizou a ideia de uma máquina capaz de executar qualquer procedimento lógico. Na Segunda Guerra Mundial, seu trabalho ajudou a decifrar mensagens cifradas.</p>
+<p>A guerra e a ciência impulsionaram máquinas como o Harvard Mark I, o Atanasoff-Berry Computer e o ENIAC, que usava cerca de 18 mil válvulas eletrônicas e ocupava uma sala inteira.</p>
+<div class="ph" data-secao="1946"></div>
+</div>
+</section>
+
+<section class="era" id="s3">
+<div class="yr">1971</div>
+<div>
+<h2>O computador chega às pessoas</h2>
+<p>Transistores, circuitos integrados e microprocessadores deixaram as máquinas menores, mais rápidas e mais baratas. Nos anos 1970 e 1980, o computador saiu dos laboratórios e entrou em escritórios, escolas e casas.</p>
+<div class="tw"><table>
+<tr><th></th><th>ENIAC (1946)</th><th>Celular atual</th></tr>
+<tr><th>Peso</th><td>cerca de 27 toneladas</td><td>cerca de 200 gramas</td></tr>
+<tr><th>Tamanho</th><td>uma sala inteira</td><td>cabe no bolso</td></tr>
+<tr><th>Velocidade</th><td>milhares de operações por segundo</td><td>bilhões de operações por segundo</td></tr>
+</table></div>
+<p>Mesma ideia, calcular, em escalas completamente diferentes. Valores aproximados.</p>
+<div class="ph" data-secao="1971"></div>
+</div>
+</section>
+
+<section class="era" id="s4">
+<div class="yr">1991</div>
+<div>
+<h2>A revolução digital</h2>
+<p>As interfaces gráficas permitiram que mais gente usasse o computador sem comandos complexos. Com a Internet e a World Wide Web, a informação passou a circular em escala global, mudando a comunicação, a educação, o trabalho e o entretenimento.</p>
+<p>Jogos eletrônicos e pixel art mostram que a tecnologia também produz cultura, e que preservá-la é preservar parte da nossa memória.</p>
+<div class="ph" data-secao="1991"></div>
+</div>
+</section>
+
+<section class="era r" id="s5">
+<div class="yr">2020</div>
+<div>
+<h2>Conectados, mas distantes?</h2>
+<p>As redes sociais aproximaram quem está longe, mas também levantam questões sobre excesso de telas, dependência digital e solidão. Na pandemia de COVID-19, estudar, trabalhar e socializar passaram a depender da tecnologia, e muitos hábitos de convivência mudaram desde então.</p>
+<p>O desafio não é abandonar a tecnologia, e sim usá-la com consciência, equilibrando o virtual e o presencial.</p>
+<div class="ph" data-secao="2020"></div>
+</div>
+</section>
+
+<section class="era r" id="s6">
+<div class="yr">Hoje</div>
+<div>
+<h2>O futuro e o papel da sociedade</h2>
+<p>Inteligência artificial e novas formas de interação entre humanos e máquinas abrem possibilidades enormes, e também desafios éticos e sociais. Já em 1843, Ada Lovelace imaginava máquinas que iam além do cálculo. Hoje cabe a nós decidir como usá-las.</p>
+<div class="note" style="border-color:var(--tl)"><b>Pergunta final</b>Como aproveitar os avanços tecnológicos sem perder a qualidade das relações humanas?</div>
+<div class="ph" data-secao="hoje"></div>
+</div>
+</section>
+
+<section class="era" id="quiz">
+<div class="yr">Quiz</div>
+<div>
+<h2>Teste o que você viu</h2>
+<div id="qs"></div>
+<p id="score" aria-live="polite"></p>
+</div>
+</section>
+
+<footer>
+<p>Exposição Memórias da Computação.</p>
+
+</footer>
+</div>
+
+<script src="fotos.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
