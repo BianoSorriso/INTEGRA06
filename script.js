@@ -145,20 +145,41 @@ const raiz = document.documentElement;
 const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // 1) Símbolos que flutuam no fundo: binário e código (presente), matemática (passado)
+// 1) Símbolos que flutuam no fundo: binário e código (presente), matemática (passado).
+//    Eles "dão a volta": quando saem por cima da tela, voltam por baixo,
+//    então sempre há símbolos aparecendo, em qualquer ponto da página.
 const simbolos = ["0", "1", "01", "10", "{ }", "</>", "λ", "∑", "π", "ℵ", "⌘", "█", "▒"];
 const caixaBits = document.getElementById("bits");
+const bits = [];
 
 for (let i = 0; i < 26; i++) {
   const span = document.createElement("span");
   span.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
   span.style.left = Math.random() * 96 + "%";
-  span.style.top = Math.random() * 96 + "%";
-  span.style.opacity = (0.5 + Math.random() * 0.5).toFixed(2);
-  span.style.setProperty("--s", (14 + Math.random() * 32).toFixed(0) + "px");   // tamanho
-  span.style.setProperty("--k", (-0.05 - Math.random() * 0.45).toFixed(2));     // velocidade do paralaxe
-  span.style.setProperty("--t", (8 + Math.random() * 8).toFixed(1) + "s");      // tempo da flutuação
+  span.style.setProperty("--s", (14 + Math.random() * 32).toFixed(0) + "px"); // tamanho
+  span.style.setProperty("--t", (8 + Math.random() * 8).toFixed(1) + "s");    // tempo da flutuação
   span.style.animationDelay = "-" + (Math.random() * 10).toFixed(1) + "s";
   caixaBits.appendChild(span);
+  bits.push({
+    el: span,
+    y0: Math.random(),                  // posição de partida (0 = topo, 1 = base da tela)
+    k: 0.05 + Math.random() * 0.45,     // velocidade com que sobe ao rolar (paralaxe)
+    opac: 0.5 + Math.random() * 0.5     // brilho do símbolo
+  });
+}
+
+function moverSimbolos() {
+  const altura = caixaBits.parentElement.clientHeight || window.innerHeight;
+  const rolagem = semMovimento ? 0 : window.scrollY;
+
+  bits.forEach(function (b) {
+    // posição = partida - rolagem * velocidade, com volta (módulo) para nunca sair da tela
+    const y = (((b.y0 * altura - rolagem * b.k) % altura) + altura) % altura;
+    // some devagar perto das bordas, para não "pular" quando dá a volta
+    const borda = Math.min(1, y / 70, (altura - y) / 70);
+    b.el.style.transform = "translateY(" + y.toFixed(1) + "px)";
+    b.el.style.opacity = (b.opac * borda).toFixed(2);
+  });
 }
 
 // 2) Progresso da rolagem: --p vai de 0 (topo) a 1 (fim) e controla
@@ -169,7 +190,7 @@ function atualizarRolagem() {
   const maximo = raiz.scrollHeight - window.innerHeight;
   const p = maximo > 0 ? Math.min(1, window.scrollY / maximo) : 0;
   raiz.style.setProperty("--p", p.toFixed(3));
-  raiz.style.setProperty("--sy", Math.round(window.scrollY));
+  moverSimbolos();
   atualizarEntradas();
   aguardandoFrame = false;
 }
