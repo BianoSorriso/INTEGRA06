@@ -391,7 +391,8 @@ footer {
   position: absolute;
   color: var(--bit);
   font: 700 var(--s, 24px)/1 ui-monospace, Menlo, Consolas, monospace;
-  transform: translateY(calc(var(--sy, 0) * var(--k, -0.2) * 1px));
+  top: 0;
+  will-change: transform, opacity;
   animation: bob var(--t, 12s) ease-in-out infinite alternate;
 }
 
