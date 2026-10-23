@@ -3,6 +3,7 @@
 // "correta" é a posição da resposta certa na lista de opções (começa em 0).
 
 // ---------- Fotos: montadas a partir do arquivo fotos.js ----------
+
 document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
   const lista = (typeof fotos !== "undefined" && fotos[caixa.dataset.secao]) || [];
 
@@ -21,6 +22,21 @@ document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
     figura.appendChild(img);
     figura.appendChild(legenda);
     caixa.appendChild(figura);
+
+    // A foto aparece inteira, sem corte e sem bordas: a largura de cada uma acompanha
+    // a proporção dela, assim todas da mesma linha ficam com a mesma altura.
+    function ajustarProporcao() {
+      if (!img.naturalWidth) {
+        return;
+      }
+      const proporcao = img.naturalWidth / img.naturalHeight; // largura / altura
+      figura.style.flex = proporcao + " 1 " + (proporcao * 150) + "px";
+      figura.style.maxWidth = (proporcao * 320) + "px"; // evita foto gigante quando está sozinha
+    }
+    img.addEventListener("load", ajustarProporcao);
+    if (img.complete) {
+      ajustarProporcao();
+    }
   });
 });
 
