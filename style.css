@@ -252,10 +252,11 @@ th {
 
 /* Espaços e legendas das fotos */
 .ph {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:12px;
-  margin:18px 0 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 18px 0 6px;
 }
 
 .slot {
@@ -279,7 +280,8 @@ th {
 }
 
 .ph figure {
-  margin:0;
+  margin: 0;
+  flex: 1 1 200px; /* valor provisório: o script.js ajusta conforme a proporção de cada foto */
 }
 
 .ph:empty {
@@ -291,12 +293,10 @@ th {
 }
 
 figure img {
-  width:100%;
-  aspect-ratio:4 / 3;
-  object-fit:contain;
-  background:var(--sf);
-  display:block;
-  border-radius:6px;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
 }
 
 /* Foto que ainda não está na pasta "imagens": vira uma caixa avisando qual arquivo falta */
