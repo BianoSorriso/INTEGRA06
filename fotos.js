@@ -23,12 +23,12 @@ const fotos = {
     {
       arquivo: "anticitera.jpg",
       descricao: "Fragmento do mecanismo de Anticítera",
-      legenda: "Fragmento do mecanismo de Anticítera, Museu Arqueológico Nacional de Atenas. Crédito: [autor, licença, fonte]."
+      legenda: "Fragmento do mecanismo de Anticítera, Museu Arqueológico Nacional de Atenas. Domínio público. Wikimedia Commons.."
     },
     {
       arquivo: "babbage-difference-engine.jpg",
       descricao: "Difference Engine de Charles Babbage",
-      legenda: "Difference Engine, de Charles Babbage, Science Museum, Londres. Crédito: [autor, licença, fonte]."
+      legenda: "Difference Engine, de Charles Babbage, Science Museum, Londres. Domínio público. Wikimedia Commons.."
     }
   ],
 
