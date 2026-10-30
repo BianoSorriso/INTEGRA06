@@ -252,15 +252,13 @@ th {
 
 /* Espaços e legendas das fotos */
 .ph {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 18px 0 6px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0 6px;
 }
-
-
 
 
 .slot {
@@ -284,11 +282,12 @@ th {
 }
 
 .ph figure {
-  margin: 0;
-  flex: 0 1 240px;
-  max-width: 320px;
-  width: 100%;
+    margin: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 320px;
 }
+
 
 .ph:empty {
   display:none;
@@ -299,20 +298,25 @@ th {
 }
 
 .ph figure img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: var(--pos, center);
-  display: block;
-  border-radius: 6px;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: var(--pos, center);
+    display: block;
+    border-radius: 6px;
 }
 
 
+
 @media (max-width: 640px) {
-  .ph figure {
-    flex: 0 1 100%;
-    max-width: 100%;
-  }
+    .ph {
+        flex-wrap: wrap;
+    }
+
+    .ph figure {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
 }
 
 /* Foto que ainda não está na pasta "imagens": vira uma caixa avisando qual arquivo falta */
