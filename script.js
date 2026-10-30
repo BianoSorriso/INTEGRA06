@@ -4,6 +4,7 @@
 
 // ---------- Fotos: montadas a partir do arquivo fotos.js ----------
 
+// ---------- Fotos: montadas a partir do arquivo fotos.js ----------
 document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
   const lista = (typeof fotos !== "undefined" && fotos[caixa.dataset.secao]) || [];
 
@@ -14,6 +15,9 @@ document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
     const img = document.createElement("img");
     img.src = "imagens/" + foto.arquivo;
     img.alt = foto.descricao;
+    if (foto.posicao) {
+      img.style.objectPosition = foto.posicao; // parte da foto que fica visível
+    }
 
     const legenda = document.createElement("figcaption");
     legenda.textContent = foto.legenda;
@@ -22,6 +26,12 @@ document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
     figura.appendChild(img);
     figura.appendChild(legenda);
     caixa.appendChild(figura);
+  });
+});
+
+
+
+    
 
     // A foto aparece inteira, sem corte e sem bordas: a largura de cada uma acompanha
     // a proporção dela, assim todas da mesma linha ficam com a mesma altura.
