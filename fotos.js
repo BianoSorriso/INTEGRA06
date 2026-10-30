@@ -54,7 +54,7 @@ const fotos = {
     {
       arquivo: "intel-4004.jpg",
       descricao: "Microprocessador Intel 4004",
-      legenda: "Microprocessador Intel 4004, 1971. Crédito: [autor, licença, fonte]."
+      legenda: "Microprocessador Intel 4004, 1971. Crédito: Domínio público. Wikimedia Commons.."
     }
   ],
 
@@ -62,12 +62,12 @@ const fotos = {
     {
       arquivo: "interface-grafica.jpg",
       descricao: "Interface gráfica de um sistema antigo",
-      legenda: "Interface gráfica de um sistema da época. Crédito: [autor, licença, fonte]."
+      legenda: "Interface gráfica de um sistema da época. Crédito: Domínio público. Wikimedia Commons.."
     },
     {
       arquivo: "servidor-cern.jpg",
       descricao: "Servidor web do CERN",
-      legenda: "Computador usado nos primeiros anos da Web, no CERN. Crédito: [autor, licença, fonte]."
+      legenda: "Computador usado nos primeiros anos da Web, no CERN. Crédito: Domínio público. Wikimedia Commons."
     },
     {
       arquivo: "pixel-art.jpg",
@@ -80,7 +80,7 @@ const fotos = {
     {
       arquivo: "pessoas-telas.jpg",
       descricao: "Pessoas usando telas",
-      legenda: "[Descrição]. Crédito: [autor, licença, fonte]."
+      legenda: "[Descrição]. Crédito: Domínio público. Wikimedia Commons."
     }
   ],
 
