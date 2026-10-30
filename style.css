@@ -252,11 +252,17 @@ th {
 
 /* Espaços e legendas das fotos */
 .ph {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 12px;
   margin: 18px 0 6px;
+}
+
+/* No celular, uma foto embaixo da outra */
+@media (max-width: 640px) {
+  .ph {
+    grid-template-columns: 1fr;
+  }
 }
 
 .slot {
@@ -281,7 +287,6 @@ th {
 
 .ph figure {
   margin: 0;
-  flex: 1 1 200px; /* valor provisório: o script.js ajusta conforme a proporção de cada foto */
 }
 
 .ph:empty {
@@ -294,11 +299,12 @@ th {
 
 figure img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: var(--pos, center);
   display: block;
   border-radius: 6px;
 }
-
 /* Foto que ainda não está na pasta "imagens": vira uma caixa avisando qual arquivo falta */
 .foto.faltando {
   border: 2px dashed var(--line);
