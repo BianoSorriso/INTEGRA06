@@ -1,10 +1,9 @@
-// Quiz da exposição "Memórias da Computação"
-// Para editar uma pergunta, mude os textos abaixo.
-// "correta" é a posição da resposta certa na lista de opções (começa em 0).
 
-// ---------- Fotos: montadas a partir do arquivo fotos.js ----------
+ // Quiz da exposição "Memórias da Computação"
+ // Para editar uma pergunta, mude os textos abaixo.
+ // "correta" é a posição da resposta certa na lista de opções (começa em 0).
 
-// ---------- Fotos: montadas a partir do arquivo fotos.js ----------
+ // ---------- Fotos: montadas a partir do arquivo fotos.js ----------
 document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
   const lista = (typeof fotos !== "undefined" && fotos[caixa.dataset.secao]) || [];
 
@@ -13,10 +12,13 @@ document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
     figura.className = "foto";
 
     const img = document.createElement("img");
-    img.src = "imagens/" + foto.arquivo;
+    img.loading = "lazy";
+    img.decoding = "async";
     img.alt = foto.descricao;
+    img.src = "imagens/" + foto.arquivo;
+
     if (foto.posicao) {
-      img.style.objectPosition = foto.posicao; // parte da foto que fica visível
+      img.style.objectPosition = foto.posicao;
     }
 
     const legenda = document.createElement("figcaption");
@@ -26,27 +28,6 @@ document.querySelectorAll(".ph[data-secao]").forEach(function (caixa) {
     figura.appendChild(img);
     figura.appendChild(legenda);
     caixa.appendChild(figura);
-  });
-});
-
-
-
-    
-
-    // A foto aparece inteira, sem corte e sem bordas: a largura de cada uma acompanha
-    // a proporção dela, assim todas da mesma linha ficam com a mesma altura.
-    function ajustarProporcao() {
-      if (!img.naturalWidth) {
-        return;
-      }
-      const proporcao = img.naturalWidth / img.naturalHeight; // largura / altura
-      figura.style.flex = proporcao + " 1 " + (proporcao * 150) + "px";
-      figura.style.maxWidth = (proporcao * 320) + "px"; // evita foto gigante quando está sozinha
-    }
-    img.addEventListener("load", ajustarProporcao);
-    if (img.complete) {
-      ajustarProporcao();
-    }
   });
 });
 
@@ -110,7 +91,6 @@ const placar = document.getElementById("score");
 let respondidas = 0;
 let acertos = 0;
 
-// Monta uma pergunta na tela, com seus botões de resposta
 function montarPergunta(item, indice) {
   const cartao = document.createElement("div");
   cartao.className = "q";
@@ -128,9 +108,11 @@ function montarPergunta(item, indice) {
     botao.type = "button";
     botao.className = "opt";
     botao.textContent = texto;
+
     botao.onclick = function () {
       responder(cartao, botao, posicao, item, explicacao);
     };
+
     cartao.appendChild(botao);
   });
 
@@ -138,12 +120,12 @@ function montarPergunta(item, indice) {
   caixaQuiz.appendChild(cartao);
 }
 
-// Trata o clique em uma resposta: marca certo/errado e mostra a explicação
 function responder(cartao, botaoClicado, posicao, item, explicacao) {
   const botoes = cartao.querySelectorAll(".opt");
 
   botoes.forEach(function (botao, i) {
     botao.disabled = true;
+
     if (i === item.correta) {
       botao.classList.add("ok");
     }
@@ -159,6 +141,7 @@ function responder(cartao, botaoClicado, posicao, item, explicacao) {
   explicacao.hidden = false;
 
   respondidas++;
+
   if (respondidas === perguntas.length) {
     placar.textContent = "Você acertou " + acertos + " de " + perguntas.length + ".";
   }
@@ -170,10 +153,6 @@ perguntas.forEach(montarPergunta);
 const raiz = document.documentElement;
 const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// 1) Símbolos que flutuam no fundo: binário e código (presente), matemática (passado)
-// 1) Símbolos que flutuam no fundo: binário e código (presente), matemática (passado).
-//    Eles "dão a volta": quando saem por cima da tela, voltam por baixo,
-//    então sempre há símbolos aparecendo, em qualquer ponto da página.
 const simbolos = ["0", "1", "01", "10", "{ }", "</>", "λ", "∑", "π", "ℵ", "⌘", "█", "▒"];
 const caixaBits = document.getElementById("bits");
 const bits = [];
@@ -182,15 +161,17 @@ for (let i = 0; i < 26; i++) {
   const span = document.createElement("span");
   span.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
   span.style.left = Math.random() * 96 + "%";
-  span.style.setProperty("--s", (14 + Math.random() * 32).toFixed(0) + "px"); // tamanho
-  span.style.setProperty("--t", (8 + Math.random() * 8).toFixed(1) + "s");    // tempo da flutuação
+  span.style.setProperty("--s", (14 + Math.random() * 32).toFixed(0) + "px");
+  span.style.setProperty("--t", (8 + Math.random() * 8).toFixed(1) + "s");
   span.style.animationDelay = "-" + (Math.random() * 10).toFixed(1) + "s";
+
   caixaBits.appendChild(span);
+
   bits.push({
     el: span,
-    y0: Math.random(),                  // posição de partida (0 = topo, 1 = base da tela)
-    k: 0.05 + Math.random() * 0.45,     // velocidade com que sobe ao rolar (paralaxe)
-    opac: 0.5 + Math.random() * 0.5     // brilho do símbolo
+    y0: Math.random(),
+    k: 0.05 + Math.random() * 0.45,
+    opac: 0.5 + Math.random() * 0.5
   });
 }
 
@@ -199,25 +180,24 @@ function moverSimbolos() {
   const rolagem = semMovimento ? 0 : window.scrollY;
 
   bits.forEach(function (b) {
-    // posição = partida - rolagem * velocidade, com volta (módulo) para nunca sair da tela
     const y = (((b.y0 * altura - rolagem * b.k) % altura) + altura) % altura;
-    // some devagar perto das bordas, para não "pular" quando dá a volta
     const borda = Math.min(1, y / 70, (altura - y) / 70);
+
     b.el.style.transform = "translateY(" + y.toFixed(1) + "px)";
     b.el.style.opacity = (b.opac * borda).toFixed(2);
   });
 }
 
-// 2) Progresso da rolagem: --p vai de 0 (topo) a 1 (fim) e controla
-//    a barra do topo e a troca do fundo do passado para o presente
 let aguardandoFrame = false;
 
 function atualizarRolagem() {
   const maximo = raiz.scrollHeight - window.innerHeight;
   const p = maximo > 0 ? Math.min(1, window.scrollY / maximo) : 0;
+
   raiz.style.setProperty("--p", p.toFixed(3));
   moverSimbolos();
   atualizarEntradas();
+
   aguardandoFrame = false;
 }
 
@@ -227,39 +207,37 @@ window.addEventListener("scroll", function () {
     requestAnimationFrame(atualizarRolagem);
   }
 }, { passive: true });
+
 window.addEventListener("resize", atualizarRolagem);
 
-// 3) Animação ligada à rolagem: cada elemento recebe --r (0 = escondido, 1 = visível).
-//    Descendo, ele aparece aos poucos; subindo, ele se desfaz. Nada fica "gravado".
 const alvos = semMovimento ? [] : Array.from(document.querySelectorAll(
   ".era, .era .yr, .era > div:last-child > *:not(#qs), .q"
 ));
 
 if (!semMovimento) {
-  raiz.classList.add("sc"); // avisa o CSS que o script está funcionando
+  raiz.classList.add("sc");
 }
 
 function atualizarEntradas() {
   const altura = window.innerHeight;
-  const restante = raiz.scrollHeight - altura - window.scrollY; // quanto ainda dá para rolar
-  const inicio = altura * 0.95; // começa a aparecer quando o topo do elemento passa daqui
+  const restante = raiz.scrollHeight - altura - window.scrollY;
+  const inicio = altura * 0.95;
 
   alvos.forEach(function (el) {
     const topo = el.getBoundingClientRect().top;
-    // Até onde o elemento precisa subir para ficar 100% visível (70% da tela).
-    // No fim da página ele não consegue subir tanto, então o limite se ajusta.
     const fim = Math.min(Math.max(altura * 0.7, topo - restante), inicio - 20);
     const r = Math.max(0, Math.min(1, (inicio - topo) / (inicio - fim)));
+
     el.style.setProperty("--r", r.toFixed(3));
   });
 }
 
 atualizarRolagem();
 
-// ---------- Fotos ----------
-// Se o arquivo da foto não existir na pasta "imagens", a caixa avisa qual nome está faltando
+// ---------- Identificação de fotos ausentes ----------
 function marcarFaltando(img) {
   const figura = img.closest("figure");
+
   if (figura) {
     figura.classList.add("faltando");
   }
@@ -269,6 +247,7 @@ document.querySelectorAll(".foto img").forEach(function (img) {
   if (img.complete && img.naturalWidth === 0) {
     marcarFaltando(img);
   }
+
   img.addEventListener("error", function () {
     marcarFaltando(img);
   });
