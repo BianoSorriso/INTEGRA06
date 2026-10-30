@@ -80,7 +80,7 @@ const fotos = {
     {
       arquivo: "pessoas-telas.jpg",
       descricao: "Pessoas usando telas",
-      legenda: "Crédito: Domínio público. Wikimedia Commons."
+      legenda: "Domínio público. Wikimedia Commons."
     }
   ],
 
