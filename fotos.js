@@ -49,7 +49,7 @@ const fotos = {
     {
       arquivo: "acervo-faculdade.jpg",
       descricao: "Item do acervo da faculdade",
-      legenda: "[Nome do item e ano]. Acervo da faculdade. Foto: [seu nome]."
+      legenda: ""
     },
     {
       arquivo: "intel-4004.jpg",
