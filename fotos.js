@@ -49,7 +49,7 @@ const fotos = {
     {
       arquivo: "acervo-faculdade.jpg",
       descricao: "Item do acervo da faculdade",
-      legenda: ""
+      legenda: "Disquete, mídia de armazenamento muito usada nos computadores pessoais a partir dos anos 1970."
     },
     {
       arquivo: "intel-4004.jpg",
