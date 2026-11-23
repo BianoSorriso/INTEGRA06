@@ -57,6 +57,22 @@ body {
   font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 
+
+/* Links seguem a paleta definida para o tema ativo */
+a {
+  color:var(--acc);
+  text-decoration-color:color-mix(in srgb,var(--acc) 55%,transparent);
+  text-underline-offset:3px;
+  transition:color .2s ease,text-decoration-color .2s ease;
+}
+a:visited { color:var(--tl); }
+a:hover { color:var(--tl); text-decoration-color:currentColor; }
+a:active { color:var(--acc); }
+a.go, a.go:visited, a.go:hover, a.go:active {
+  color:var(--bg);
+  text-decoration:none;
+}
+
 /* Layout geral e cabeçalho */
 .wrap {
   max-width:780px;
@@ -355,6 +371,34 @@ figcaption {
   color:var(--mut);
   margin-top:6px;
 }
+
+
+/* Visualização das imagens em tela cheia */
+.ph figure img { cursor:zoom-in; }
+.lightbox {
+  position:fixed; inset:0; z-index:1000;
+  display:none; align-items:center; justify-content:center;
+  flex-direction:column; gap:12px;
+  padding:56px 24px 24px; background:rgba(0,0,0,.92);
+}
+.lightbox.aberto { display:flex; }
+.lightbox-image {
+  display:block; max-width:min(96vw,1500px);
+  max-height:calc(100vh - 112px); width:auto; height:auto;
+  object-fit:contain; border-radius:6px; cursor:zoom-out;
+}
+.lightbox-caption {
+  max-width:900px; margin:0; color:#fff;
+  text-align:center; font-size:.9rem;
+}
+.lightbox-close {
+  position:absolute; top:14px; right:20px; width:44px; height:44px;
+  border:1px solid rgba(255,255,255,.55); border-radius:50%;
+  background:rgba(255,255,255,.12); color:#fff;
+  font-size:2rem; line-height:1; cursor:pointer;
+}
+.lightbox-close:hover { background:rgba(255,255,255,.25); }
+body.lightbox-aberto { overflow:hidden; }
 
 /* Rodapé e ajustes para celular */
 footer {

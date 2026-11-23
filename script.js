@@ -278,3 +278,50 @@ document.querySelectorAll(".foto img").forEach(function (img) {
     marcarFaltando(img);
   });
 });
+
+
+/* ---------- Ampliação das imagens em tela cheia ---------- */
+const lightbox = document.getElementById("lightbox");
+const lightboxImagem = document.getElementById("lightboxImage");
+const lightboxLegenda = document.getElementById("lightboxCaption");
+const fecharLightbox = document.getElementById("lightboxClose");
+let imagemAnterior = null;
+
+function abrirLightbox(img) {
+  imagemAnterior = img;
+  lightboxImagem.src = img.currentSrc || img.src;
+  lightboxImagem.alt = img.alt || "Imagem ampliada";
+  const legenda = img.closest("figure")?.querySelector("figcaption");
+  lightboxLegenda.textContent = legenda ? legenda.textContent : "";
+  lightbox.classList.add("aberto");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("lightbox-aberto");
+  fecharLightbox.focus();
+}
+
+function encerrarLightbox() {
+  lightbox.classList.remove("aberto");
+  lightbox.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("lightbox-aberto");
+  lightboxImagem.removeAttribute("src");
+  if (imagemAnterior) imagemAnterior.focus?.();
+}
+
+document.querySelectorAll(".ph figure img").forEach(function (img) {
+  img.tabIndex = 0;
+  img.addEventListener("click", function () { abrirLightbox(img); });
+  img.addEventListener("keydown", function (evento) {
+    if (evento.key === "Enter" || evento.key === " ") {
+      evento.preventDefault();
+      abrirLightbox(img);
+    }
+  });
+});
+
+fecharLightbox.addEventListener("click", encerrarLightbox);
+lightbox.addEventListener("click", function (evento) {
+  if (evento.target === lightbox || evento.target === lightboxImagem) encerrarLightbox();
+});
+document.addEventListener("keydown", function (evento) {
+  if (evento.key === "Escape" && lightbox.classList.contains("aberto")) encerrarLightbox();
+});
