@@ -1,3 +1,29 @@
+// ---------- Alternância entre tema claro e escuro ----------
+const botaoTema = document.getElementById("themeToggle");
+const temaSalvo = localStorage.getItem("memorias-tema");
+
+if (temaSalvo === "dark" || temaSalvo === "light") {
+  document.documentElement.dataset.theme = temaSalvo;
+} else {
+  document.documentElement.dataset.theme = "light";
+}
+
+function atualizarBotaoTema() {
+  const escuro = document.documentElement.dataset.theme === "dark";
+  botaoTema.textContent = escuro ? "☀ Tema claro" : "☾ Tema escuro";
+  botaoTema.setAttribute("aria-label", escuro ? "Ativar tema claro" : "Ativar tema escuro");
+  botaoTema.setAttribute("aria-pressed", String(escuro));
+}
+
+botaoTema.addEventListener("click", function () {
+  const proximoTema = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = proximoTema;
+  localStorage.setItem("memorias-tema", proximoTema);
+  atualizarBotaoTema();
+});
+
+atualizarBotaoTema();
+
 
  // Quiz da exposição "Memórias da Computação"
  // Para editar uma pergunta, mude os textos abaixo.
